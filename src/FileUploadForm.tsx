@@ -2,7 +2,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
-
+import swal from 'sweetalert';
 type FormData = {
 admission:string;
   file: FileList;
@@ -12,6 +12,7 @@ const FileUploadForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -21,13 +22,13 @@ const FileUploadForm: React.FC = () => {
     formData.append('file', data.file[0]);
 
     try {
-      const response = await axios.post('https://assignmentbackend.up.railway.app/api/assignments', formData, {
+      await axios.post('https://assignmentbackend.up.railway.app/api/assignments', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('File uploaded successfully!');
-      console.log(response.data);
+      reset()
+      swal ( "Success" ,  "Assignment Successfully Submitted" ,  "success" )
     } catch (error) {
       console.error('Error uploading file:', error);
       alert('Error uploading file');
