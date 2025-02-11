@@ -21,7 +21,7 @@ const FileUploadForm: React.FC = () => {
     formData.append('file', data.file[0]);
 
     try {
-      const response = await axios.post('assignmentbackend.up.railway.app/api/assignments', formData, {
+      const response = await axios.post('https://assignmentbackend.up.railway.app/api/assignments', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
